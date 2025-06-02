@@ -1,0 +1,12 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: image-classifier
+  namespace: rhods-project
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: tensorrt
+      runtime: triton-runtime
+      storageUri: s3://models/image-classifier

@@ -1,0 +1,13 @@
+apiVersion: kubeflow.org/v1
+kind: Notebook
+metadata:
+  name: team-notebook-2
+spec:
+  template:
+    spec:
+      containers:
+        - name: team-notebook-2
+          resources:
+            limits:
+              cpu: "6"
+              memory: "24Gi"

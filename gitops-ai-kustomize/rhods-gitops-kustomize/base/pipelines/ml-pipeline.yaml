@@ -1,0 +1,9 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: ml-pipeline
+  namespace: rhods-project
+spec:
+  params:
+    - name: storage
+      default: "10Gi"

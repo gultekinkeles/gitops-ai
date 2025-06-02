@@ -1,0 +1,12 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: fraud-detector
+  namespace: rhods-project
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: onnx
+      runtime: ovms-runtime
+      storageUri: s3://models/fraud-detector

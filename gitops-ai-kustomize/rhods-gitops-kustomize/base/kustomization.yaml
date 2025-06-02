@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+  - workbenches/team-notebook-1.yaml
+  - workbenches/team-notebook-2.yaml
+  - model-serving/fraud-detector.yaml
+  - model-serving/image-classifier.yaml
+  - pipelines/ml-pipeline.yaml
+  - rbac.yaml
+
+commonLabels:
+  app.kubernetes.io/managed-by: kustomize

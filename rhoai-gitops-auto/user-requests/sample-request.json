@@ -1,0 +1,12 @@
+{
+  "username": "ahmet",
+  "namespace": "dsproject-ahmet",
+  "workbenches": ["wb1", "wb2"],
+  "models": [
+    {
+      "name": "fraud-model",
+      "format": "onnx",
+      "path": "models/ahmet/fraud.onnx"
+    }
+  ]
+}

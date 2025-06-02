@@ -1,0 +1,28 @@
+name: Generate Overlay from JSON
+
+on:
+  push:
+    paths:
+      - 'user-requests/*.json'
+
+jobs:
+  generate-overlay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Run generator script
+        run: |
+          bash scripts/generate_overlay.sh $(ls user-requests/*.json | tail -n1)
+
+      - name: Commit and push
+        run: |
+          git config user.name "GitOps Bot"
+          git config user.email "gitops@bot.com"
+          git add overlays/
+          git commit -m "Auto-generate overlay for new user"
+          git push

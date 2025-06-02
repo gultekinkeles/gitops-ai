@@ -1,0 +1,5 @@
+apiVersion: kubeflow.org/v1
+kind: Notebook
+metadata:
+  name: $(USERNAME)-wb
+  namespace: $(NAMESPACE_NAME)

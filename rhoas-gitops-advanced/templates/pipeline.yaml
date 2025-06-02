@@ -1,0 +1,9 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: ${PIPELINE_NAME}
+  namespace: ${NAMESPACE}
+spec:
+  params:
+  - name: storage
+    default: ${STORAGE_SIZE}

@@ -1,0 +1,14 @@
+apiVersion: serving.kserve.io/v1alpha1
+kind: ServingRuntime
+metadata:
+  name: ${RUNTIME_TYPE}-runtime
+  namespace: ${NAMESPACE}
+spec:
+  supportedModelFormats:
+  - name: ${MODEL_FORMAT}
+    version: "1"
+    autoSelect: true
+  containers:
+  - name: ${RUNTIME_TYPE}
+    image: quay.io/modh/${RUNTIME_TYPE}-runtime:latest
+    resources: ${MODEL_RESOURCES}

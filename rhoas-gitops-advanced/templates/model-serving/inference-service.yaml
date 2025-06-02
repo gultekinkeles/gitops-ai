@@ -1,0 +1,13 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: ${MODEL_NAME}
+  namespace: ${NAMESPACE}
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: ${MODEL_FORMAT}
+      runtime: ${RUNTIME_TYPE}-runtime
+      storageUri: "s3://models/${MODEL_NAME}"
+      resources: ${MODEL_RESOURCES}

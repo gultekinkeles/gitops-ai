@@ -1,0 +1,21 @@
+{
+  "requestId": "example-001",
+  "type": "group",
+  "name": "ml-team-1",
+  "resources": {
+    "workbenches": [
+      {"name": "notebook-1", "size": "medium", "image": "minimal-py39", "storage": "30Gi"},
+      {"name": "notebook-2", "size": "large", "image": "pytorch-gpu", "storage": "50Gi"}
+    ],
+    "models": [
+      {"name": "fraud-detector", "runtime": "ovms", "format": "onnx", "size": "medium"},
+      {"name": "image-classifier", "runtime": "triton", "format": "tensorrt", "size": "large"}
+    ],
+    "pipelines": [
+      {"name": "ml-pipeline", "storage": "10Gi"}
+    ],
+    "rbac": {
+      "role": "admin"
+    }
+  }
+}

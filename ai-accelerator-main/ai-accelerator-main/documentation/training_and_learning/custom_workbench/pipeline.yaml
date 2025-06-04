@@ -1,0 +1,93 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  generation: 4
+  name: new-pipeline
+  namespace: redhat-ods-applications
+spec:
+  tasks:
+    - name: git-clone
+      params:
+        - name: URL
+          value: "https://github.com/redhat-ai-services/ai-accelerator"
+        - name: REVISION
+          value: ""
+        - name: REFSPEC
+          value: ""
+        - name: SUBMODULES
+          value: "true"
+        - name: DEPTH
+          value: "1"
+        - name: SSL_VERIFY
+          value: "true"
+        - name: CRT_FILENAME
+          value: ca-bundle.crt
+        - name: SUBDIRECTORY
+          value: ""
+        - name: SPARSE_CHECKOUT_DIRECTORIES
+          value: ""
+        - name: DELETE_EXISTING
+          value: "true"
+        - name: HTTP_PROXY
+          value: ""
+        - name: HTTPS_PROXY
+          value: ""
+        - name: NO_PROXY
+          value: ""
+        - name: VERBOSE
+          value: "true"
+        - name: USER_HOME
+          value: /home/git
+      taskRef:
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
+      workspaces:
+        - name: output
+          workspace: output
+    - name: buildah
+      params:
+        - name: IMAGE
+          value: CHANGEME***/redhat-ods-applications/custom-wb
+        - name: STORAGE_DRIVER
+          value: vfs
+        - name: DOCKERFILE
+          value: documentation/training_and_learning/custom_workbench/Dockerfile
+        - name: CONTEXT
+          value: .
+        - name: TLS_VERIFY
+          value: "true"
+        - name: FORMAT
+          value: oci
+        - name: BUILD_EXTRA_ARGS
+          value: ""
+        - name: PUSH_EXTRA_ARGS
+          value: ""
+        - name: SKIP_PUSH
+          value: "false"
+      runAfter:
+        - git-clone
+      taskRef:
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: buildah
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
+      workspaces:
+        - name: source
+          workspace: output
+        #  CHANGEME Uncomment lines below if pushing to external registry
+        # - name: dockerconfig
+        #   workspace: docker-credentials
+  workspaces:
+    - name: output
+    # CHANGEME Uncomment line below if pushing to external registry
+    # - name: docker-credentials

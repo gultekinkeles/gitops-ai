@@ -4,3 +4,4 @@ metadata:
   name: ai-example-multi-model-serving
   labels:
     modelmesh-enabled: 'true'
+    argocd.argoproj.io/managed-by: openshift-gitops
